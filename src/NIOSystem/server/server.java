@@ -15,13 +15,13 @@ import java.util.Set;
 /**
  * Created by tjy on 2015/11/18.
  */
-public class server {
+public class Server {
     public SelectorLoop connectionBell;
     public SelectorLoop readBell;
     public boolean isReadBellRunning=false;
 
     public static void main(String [] args) throws IOException {
-        new server().start();
+        new Server().start();
     }
 
     public void start() throws IOException{
@@ -82,9 +82,9 @@ public class server {
                 sc.configureBlocking(false);
                 sc.register(readBell.getSelector(), SelectionKey.OP_READ);
 
-                synchronized (server.this){
-                    if(!server.this.isReadBellRunning){
-                        server.this.isReadBellRunning = true;
+                synchronized (Server.this){
+                    if(!Server.this.isReadBellRunning){
+                        Server.this.isReadBellRunning = true;
                         new Thread(readBell).start();
                     }
                 }
